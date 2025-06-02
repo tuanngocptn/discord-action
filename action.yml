@@ -1,0 +1,25 @@
+name: "Discord Action"
+description: "Discord action"
+author: "GitHub"
+branding:
+  icon: "activity"
+  color: "green"
+inputs:
+  message:
+    description: "Your message you want to send to telegram"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Init Discord Action
+      shell: bash
+      run: |
+        source ${{ github.action_path }}/index.sh
+        health_check
+
+    - name: Send Message
+      shell: bash
+      run: |
+        source ${{ github.action_path }}/index.sh
+        send_message "${{ inputs.message }}"
